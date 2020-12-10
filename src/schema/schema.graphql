@@ -1,0 +1,19 @@
+scalar Domain
+scalar Object
+
+enum Service {
+  IPAPI
+  RDAP
+  Ping
+  VirusTotal
+}
+
+type ServiceResponse {
+  service: Service!
+  data: Object
+  error: Object
+}
+
+type Query {
+  getIPInfo(domain: Domain!, services: [Service] = [IPAPI, Ping]): [ServiceResponse]!
+}

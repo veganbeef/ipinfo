@@ -1,0 +1,14 @@
+# ipinfo server
+This is a work-in-progress of a GraphQL server for queries of website metadata.
+
+##
+
+## to do
+* move API keys to a secret storage service
+* add automatic generation of schema-types.ts based on schema.graphql file
+* add GraphQL response types based on each external API's response data
+* add code to handle requests when workers are not ready
+* message queue - would solve double-callback issue
+* add a message queue to handle requests when workers are down and to prevent the callback from being invoked twice (see WorkerManager.ts line 48)
+* move resolver method (processIPInfoQuery) to a dataSource class to allow for one instance per request instead of one per application
+
