@@ -8,6 +8,19 @@ npm install
 npm run start:dev
 ```
 
+Once the server is up and running, you can load the GraphQL Playground at [localhost:3000/graphql].
+Here's a sample query for you to try:
+```
+query {
+  getIPInfo(domain:"lobste.rs", services:[IPAPI, VirusTotal]) {
+    service
+    data
+    error
+  }
+}
+```
+
+
 To build and start the project for a production environment (not advised):
 ```
 npm run build
