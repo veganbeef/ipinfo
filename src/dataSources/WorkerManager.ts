@@ -21,11 +21,11 @@ export class WorkerManager {
    */
   public processIPInfoQuery(args: GetIPInfoQueryArgs): Promise<ServiceResponse[]> {
     return new Promise(resolve => {
-      let responses: ServiceResponse[] = [];
-      for (let i = 0; i < args.services.length; i++) {
+      const responses: ServiceResponse[] = [];
+      for (const service of args.services) {
         this._queueJob({
           domain: args.domain,
-          service: args.services[i]
+          service
         }, (message: IWorkerResponse) => {
           if (!responses.map(resp => resp.service).includes(message.service)) {
             responses.push({

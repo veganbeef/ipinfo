@@ -7,7 +7,7 @@ export enum Service {
 
 export type GetIPInfoQueryArgs = {
   domain: string;
-  services: Array<Service>;
+  services: Service[];
 };
 
 export type ServiceResponse = {

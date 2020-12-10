@@ -122,6 +122,6 @@ const worker = new RESTWorker();
 
 process.on('message', message => {
   worker.processMessage(message).then(response => {
-    (<any> process).send(response);
+    (process as any).send(response);
   });
 });
