@@ -1,7 +1,18 @@
 # ipinfo server
 This is a work-in-progress of a GraphQL server for queries of website metadata.
 
-##
+## getting started
+To start the dev server, run the following commands:
+```
+npm install
+npm run start:dev
+```
+
+To build and start the project for a production environment (not advised):
+```
+npm run build
+npm run start
+```
 
 ## to do
 * move API keys to a secret storage service
