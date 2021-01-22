@@ -1,6 +1,7 @@
 scalar Domain
 scalar Object
 
+# input and response enum of all available services
 enum Service {
   IPAPI
   RDAP
@@ -8,12 +9,14 @@ enum Service {
   VirusTotal
 }
 
+# response type for getIPInfo query
 type ServiceResponse {
   service: Service!
   data: Object
   error: Object
 }
 
+# root of all GraphQL queries
 type Query {
   getIPInfo(domain: Domain!, services: [Service] = [IPAPI, Ping]): [ServiceResponse]!
 }
