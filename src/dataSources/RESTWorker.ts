@@ -125,7 +125,7 @@ class RESTWorker {
       throw new NetworkError('request failed');
     });
     if (!response.ok) {
-      throw new NoDataError(`response has error code: ${response.status}`);
+      throw new NetworkError(`response has error code: ${response.status}`);
     }
     const jsonResponse = await response.json().catch((error: any) => {
       throw new NoDataError('unable to parse JSON');
