@@ -18,6 +18,8 @@ export class WorkerManager {
 
   /**
    * Resolver method to break down a request into jobs, add those jobs to the queue, and formulate a response
+   * @param {GetIPInfoQueryArgs} args - input args from the getIPInfo GraphQL query
+   * @returns {Promise<ServiceResponse[]>}
    */
   public processIPInfoQuery(args: GetIPInfoQueryArgs): Promise<ServiceResponse[]> {
     return new Promise(resolve => {
@@ -46,6 +48,9 @@ export class WorkerManager {
   /**
    * Internal method to assign work to the next worker
    * TODO: reorganize so .on('message') callback is not added multiple times
+   * @param {IWorkerJob} job - object containing info about the job to be sent to the worker pool
+   * @param {(message: IWorkerResponse) => any} callback - anonymous function to handle 'message' event from worker
+   * @returns {void}
    */
   private _queueJob(job: IWorkerJob, callback: (message: IWorkerResponse) => any): void {
     this._workerPool[this._nextWorker].send(job);
@@ -55,16 +60,22 @@ export class WorkerManager {
 
   /**
    * Internal method to update the next worker index
+   * @returns {void}
    */
   private _iterateNextWorker(): void {
-    (this._nextWorker < (this._workerPool.length - 1))
-      ? this._nextWorker++
-      : this._nextWorker = 0;
+    if (this._nextWorker < (this._workerPool.length - 1)) {
+      this._nextWorker++;
+    } else {
+      this._nextWorker = 0;
+    }
   }
 
   /**
    * Internal method to recreate any workers that go down
    * TODO: handle potential lost tasks from workers that have errored out
+   * @param {any} error - error object from worker
+   * @param {number} index - index of worker within the worker pool
+   * @returns {void}
    */
   private _processWorkerError(error: any, index: number): void {
     this._workerPool[index].kill();
@@ -73,6 +84,8 @@ export class WorkerManager {
 
   /**
    * Internal method to create a new worker in a forked process and add an error handler
+   * @param {number} index
+   * @returns {ChildProcess}
    */
   private _createNewWorker(index: number): ChildProcess {
     const worker = fork(__dirname + '/RESTWorker.ts');

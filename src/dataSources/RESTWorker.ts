@@ -13,6 +13,8 @@ class RESTWorker {
 
   /**
    * Main method to accept and validate a message before sending it to the proper service method
+   * @param {IWorkerJob} message - input message from WorkerManager
+   * @returns {Promise<IWorkerResponse>}
    */
   public async processMessage(message: IWorkerJob): Promise<IWorkerResponse> {
     try {
@@ -42,9 +44,11 @@ class RESTWorker {
 
   /**
    * Internal method to ensure the message is properly formatted
+   * @param {IWorkerJob} message - input message from WorkerManager (via this.processMessage())
+   * @returns {IWorkerJob}
    * @throws {ValidationError}
    */
-  private _validateMessage(message: any): IWorkerJob {
+  private _validateMessage(message: IWorkerJob): IWorkerJob {
     const messageKeys = Object.keys(message);
     if ((!messageKeys.includes('service') || !messageKeys.includes('domain')) ||
       !Object.values(Service).includes(message.service) ||
@@ -60,6 +64,8 @@ class RESTWorker {
 
   /**
    * Service method to query the ip-api.com API
+   * @param {string} domain - a URL that will be sent to the ip-api service
+   * @returns {Promise<{}>}
    */
   private async _getIPAPIInfo(domain: string): Promise<{}> {
     const cleanedDomain = cleanURL(domain);
@@ -68,6 +74,8 @@ class RESTWorker {
 
   /**
    * Service method to query the rdap.org API and extract relevanat info from the response
+   * @param {string} domain - a URL that will be sent to the rdap service
+   * @returns {Promise<{}>}
    */
   private async _getRDAPInfo(domain: string): Promise<{}> {
     const cleanedDomain = cleanURL(domain);
@@ -81,6 +89,8 @@ class RESTWorker {
 
   /**
    * Service method to query the viewdns.info ping API
+   * @param {string} domain - a URL that will be sent to the viewdns service
+   * @returns {Promise<{}>}
    */
   private async _getPingInfo(domain: string): Promise<{}> {
     const cleanedDomain = cleanURL(domain);
@@ -89,6 +99,8 @@ class RESTWorker {
 
   /**
    * Service method to query the virustotal.com API
+   * @param {string} domain - a URL that will be sent to the virustotal service
+   * @returns {Promise<{}>}
    */
   private async _getVirusTotalInfo(domain: string): Promise<{}> {
     const cleanedDomain = cleanURL(domain);
@@ -101,6 +113,9 @@ class RESTWorker {
 
   /**
    * Internal method to wrap fetch() with error handling and response decoding
+   * @param {string} url - destination URL for the query
+   * @param {Object} [headers] - optional object containing key/value pairs to be sent as request headers
+   * @returns {Promise<any>}
    * @throws {NetworkError | NoDataError}
    */
   private async _get(url: string, headers = {}): Promise<any> {
