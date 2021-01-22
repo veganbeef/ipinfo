@@ -7,7 +7,9 @@ import {cleanURL, isIPAddress, isURL} from '../utils';
 import {pingAPIKey, virusTotalAPIKey} from '../secretKeys';
 
 /**
- * Class to encapsulate all functionality needed in a single child process
+ * Class to encapsulate all functionality needed in a single child process that makes HTTP requests to various
+ * API-based services. This class is instantiated in multiple child processes by the WorkerManager class in order to
+ * create the worker pool.
  */
 class RESTWorker {
 
@@ -43,7 +45,7 @@ class RESTWorker {
   }
 
   /**
-   * Internal method to ensure the message is properly formatted
+   * Helper method to ensure the message is properly formatted
    * @param {IWorkerJob} message - input message from WorkerManager (via this.processMessage())
    * @returns {IWorkerJob}
    * @throws {ValidationError}
@@ -63,7 +65,7 @@ class RESTWorker {
   }
 
   /**
-   * Service method to query the ip-api.com API
+   * Helper method to query the ip-api.com API
    * @param {string} domain - a URL that will be sent to the ip-api service
    * @returns {Promise<{}>}
    */
@@ -73,7 +75,7 @@ class RESTWorker {
   }
 
   /**
-   * Service method to query the rdap.org API and extract relevanat info from the response
+   * Helper method to query the rdap.org API and extract relevanat info from the response
    * @param {string} domain - a URL that will be sent to the rdap service
    * @returns {Promise<{}>}
    */
@@ -88,7 +90,7 @@ class RESTWorker {
   }
 
   /**
-   * Service method to query the viewdns.info ping API
+   * Helper method to query the viewdns.info ping API
    * @param {string} domain - a URL that will be sent to the viewdns service
    * @returns {Promise<{}>}
    */
@@ -98,7 +100,7 @@ class RESTWorker {
   }
 
   /**
-   * Service method to query the virustotal.com API
+   * Helper method to query the virustotal.com API
    * @param {string} domain - a URL that will be sent to the virustotal service
    * @returns {Promise<{}>}
    */
@@ -112,7 +114,7 @@ class RESTWorker {
   }
 
   /**
-   * Internal method to wrap fetch() with error handling and response decoding
+   * Helper method to wrap fetch() with error handling and response decoding
    * @param {string} url - destination URL for the query
    * @param {Object} [headers] - optional object containing key/value pairs to be sent as request headers
    * @returns {Promise<any>}
