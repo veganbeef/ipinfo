@@ -6,12 +6,14 @@ import cors from 'cors';
 import schema from './schema';
 import {WorkerManager} from './dataSources/WorkerManager';
 
+// create app and server
 const app = express();
 const server = new ApolloServer({
   schema,
   validationRules: [depthLimit(7)]
 });
 
+// initialize worker pool
 export const workerManager = new WorkerManager();
 
 app.use('*', cors());
