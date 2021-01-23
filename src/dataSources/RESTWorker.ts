@@ -4,7 +4,6 @@ import {Service} from '../schema/schema-types';
 import {NetworkError, NoDataError, ValidationError} from '../customErrors';
 import {IWorkerJob, IWorkerResponse} from '../interfaces';
 import {cleanURL, isIPAddress, isURL} from '../utils';
-import {pingAPIKey, virusTotalAPIKey} from '../secretKeys';
 
 /**
  * Class to encapsulate all functionality needed in a single child process that makes HTTP requests to various
@@ -96,6 +95,7 @@ class RESTWorker {
    */
   private async _getPingInfo(domain: string): Promise<{}> {
     const cleanedDomain = cleanURL(domain);
+    const pingAPIKey = process.env.PING_API_KEY!;
     return this._get(`https://api.viewdns.info/ping/?host=${cleanedDomain}&apikey=${pingAPIKey}&output=json`);
   }
 
@@ -108,7 +108,7 @@ class RESTWorker {
     const cleanedDomain = cleanURL(domain);
     const response = await this._get(
       `https://www.virustotal.com/api/v3/domains/${cleanedDomain}`,
-      {'x-apikey': virusTotalAPIKey}
+      {'x-apikey': process.env.VIRUS_TOTAL_API_KEY}
     );
     return response.data;
   }
