@@ -1,4 +1,4 @@
-import {Service} from './schema/schema-types';
+import {Service} from '../schema/schema-types';
 
 /**
  * Interface for job data to be passed to a single worker
