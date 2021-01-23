@@ -6,6 +6,9 @@ import cors from 'cors';
 import schema from './schema';
 import {WorkerManager} from './dataSources/WorkerManager';
 
+// load dotenv variables
+require('dotenv').config();
+
 // create app and server
 const app = express();
 const server = new ApolloServer({
