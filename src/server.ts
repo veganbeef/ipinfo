@@ -3,7 +3,7 @@ import { ApolloServer } from 'apollo-server-express';
 import depthLimit from 'graphql-depth-limit';
 import compression from 'compression';
 import cors from 'cors';
-import schema from './schema';
+import schema from './schema/';
 import { WorkerManager } from './dataSources/WorkerManager';
 
 // load dotenv variables
