@@ -13,7 +13,9 @@ require('dotenv').config();
 const app = express();
 const server = new ApolloServer({
   schema,
-  validationRules: [depthLimit(7)]
+  validationRules: [depthLimit(7)],
+  playground: process.env.APP_ENVIRONMENT === 'dev',
+  introspection: process.env.APP_ENVIRONMENT === 'dev'
 });
 
 // initialize worker pool
