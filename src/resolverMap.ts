@@ -2,11 +2,11 @@ import { ExpressContext } from 'apollo-server-express/dist/ApolloServer';
 import { IResolvers } from 'graphql-tools';
 
 import { GetIPInfoQueryArgs, ServiceResponse } from './schema/schema-types';
-import { Domain } from './schema/domainScalar';
+import * as Scalars from './schema/scalars';
 import { workerManager } from './server';
 
 const resolverMap: IResolvers = {
-  Domain,
+  ...Scalars,
   Query: {
     getIPInfo: async (source: any, args: GetIPInfoQueryArgs, context: ExpressContext): Promise<ServiceResponse[]> => {
       return workerManager.processIPInfoQuery(args, context);

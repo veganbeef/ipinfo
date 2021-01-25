@@ -1,7 +1,7 @@
 import { GraphQLScalarType } from 'graphql';
 import { Kind } from 'graphql/language';
 
-import { isIPAddress, isURL } from '../utils';
+import { isIPAddress, isURL } from '../../utils';
 
 /**
  * Validation method for the custom Domain scalar, both to parse inputs and serialize outputs.
