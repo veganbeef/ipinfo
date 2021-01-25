@@ -35,4 +35,6 @@ npm run start
 * message queue - would solve double-callback issue
 * add a message queue to handle requests when workers are down and to prevent the callback from being invoked twice (see WorkerManager.ts line 48)
 * move resolver method (processIPInfoQuery) to a dataSource class to allow for one instance per request instead of one per application
+* implement rest data source in front of worker manager
+* implement some sort of hash table for workermanager to keep track of requests
 
