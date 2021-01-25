@@ -1,7 +1,8 @@
 import {ChildProcess, fork} from 'child_process';
 import {IWorkerJob, IWorkerResponse} from '../interfaces';
 import {GetIPInfoQueryArgs, ServiceResponse} from '../schema/schema-types';
-
+import {ExpressContext} from 'apollo-server-express/dist/ApolloServer';
+import {logger} from '../logger';
 
 /**
  * Class to create and manage a pool of child processes
@@ -21,7 +22,7 @@ export class WorkerManager {
    * @param {GetIPInfoQueryArgs} args - input args from the getIPInfo GraphQL query
    * @returns {Promise<ServiceResponse[]>}
    */
-  public processIPInfoQuery(args: GetIPInfoQueryArgs): Promise<ServiceResponse[]> {
+  public processIPInfoQuery(args: GetIPInfoQueryArgs, context: ExpressContext): Promise<ServiceResponse[]> {
     return new Promise(resolve => {
       const responses: ServiceResponse[] = [];
       for (const service of args.services) {
