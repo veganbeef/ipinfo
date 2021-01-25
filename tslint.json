@@ -3,6 +3,11 @@
     "extends": [
         "tslint:recommended"
     ],
+    "linterOptions": {
+        "exclude": [
+            "src/server.ts"
+        ]
+    },
     "jsRules": {},
     "rules": {
         "no-console": false

@@ -1,8 +1,9 @@
+import { ExpressContext } from 'apollo-server-express/dist/ApolloServer';
 import { IResolvers } from 'graphql-tools';
-import {GetIPInfoQueryArgs, ServiceResponse} from './schema/schema-types';
-import {Domain} from './schema/domainScalar';
-import {workerManager} from './server';
-import {ExpressContext} from 'apollo-server-express/dist/ApolloServer';
+
+import { GetIPInfoQueryArgs, ServiceResponse } from './schema/schema-types';
+import { Domain } from './schema/domainScalar';
+import { workerManager } from './server';
 
 const resolverMap: IResolvers = {
   Domain,

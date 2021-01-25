@@ -1,4 +1,4 @@
-import {ApolloError} from 'apollo-server-express';
+import { ApolloError } from 'apollo-server-express';
 
 /**
  * Custom ApolloError to be returned when the input arguments to the GraphQL request fail validation

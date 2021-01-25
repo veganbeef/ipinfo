@@ -1,8 +1,9 @@
-import {ChildProcess, fork} from 'child_process';
-import {IWorkerJob, IWorkerResponse} from '../interfaces';
-import {GetIPInfoQueryArgs, ServiceResponse} from '../schema/schema-types';
-import {ExpressContext} from 'apollo-server-express/dist/ApolloServer';
-import {logger} from '../logger';
+import { ExpressContext } from 'apollo-server-express/dist/ApolloServer';
+import { ChildProcess, fork } from 'child_process';
+
+import { IWorkerJob, IWorkerResponse } from '../interfaces';
+import { logger } from '../logger';
+import { GetIPInfoQueryArgs, ServiceResponse } from '../schema/schema-types';
 
 /**
  * Class to create and manage a pool of child processes

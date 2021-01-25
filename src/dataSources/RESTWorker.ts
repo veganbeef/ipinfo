@@ -1,9 +1,9 @@
 import fetch from 'node-fetch';
 
-import {Service} from '../schema/schema-types';
-import {NetworkError, NoDataError, ValidationError} from '../customErrors';
-import {IWorkerJob, IWorkerResponse} from '../interfaces';
-import {cleanURL, isIPAddress, isURL} from '../utils';
+import { NetworkError, NoDataError, ValidationError } from '../customErrors';
+import { IWorkerJob, IWorkerResponse } from '../interfaces';
+import { Service } from '../schema/schema-types';
+import { cleanURL, isIPAddress, isURL } from '../utils';
 
 /**
  * Class to encapsulate all functionality needed in a single child process that makes HTTP requests to various

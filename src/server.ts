@@ -4,7 +4,7 @@ import depthLimit from 'graphql-depth-limit';
 import compression from 'compression';
 import cors from 'cors';
 import schema from './schema';
-import {WorkerManager} from './dataSources/WorkerManager';
+import { WorkerManager } from './dataSources/WorkerManager';
 
 // load dotenv variables
 require('dotenv').config();

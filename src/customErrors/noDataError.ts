@@ -1,4 +1,4 @@
-import {ApolloError} from 'apollo-server-express';
+import { ApolloError } from 'apollo-server-express';
 
 /**
  * Custom ApolloError to be returned when an HTTP request is successful but returns no data

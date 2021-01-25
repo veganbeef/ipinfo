@@ -1,4 +1,4 @@
-import {ApolloError} from 'apollo-server-express';
+import { ApolloError } from 'apollo-server-express';
 
 /**
  * Custom ApolloError to be returned an HTTP request fails or returns an error code (HTTP status code of 300 or greater)
