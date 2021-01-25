@@ -4,8 +4,9 @@ export interface ILogEntry {
   message?: string;
   error?: any;
   graphql?: {
-    query?: string;
+    query?: any;
     variables?: string;
+    operationName?: string;
     response?: string;
     headers?: string;
   }

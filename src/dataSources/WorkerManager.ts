@@ -30,6 +30,20 @@ export class WorkerManager {
           domain: args.domain,
           service
         }, (message: IWorkerResponse) => {
+          if (message.error) {
+            logger.addLog({
+              methodName: 'processIPInfoQuery',
+              className: 'WorkerManager',
+              error: JSON.stringify(message.error),
+              graphql: {
+                query: context.connection!.query,
+                variables: JSON.stringify(context.connection!.variables),
+                operationName: context.connection!.operationName,
+                response: JSON.stringify(context.res),
+                headers: JSON.stringify(context.req.headers)
+              }
+            });
+          }
           if (!responses.map(resp => resp.service).includes(message.service)) {
             responses.push({
               service: message.service,
@@ -81,6 +95,12 @@ export class WorkerManager {
   private _processWorkerError(error: any, index: number): void {
     this._workerPool[index].kill();
     this._workerPool[index] = this._createNewWorker(index);
+    logger.addLog({
+      methodName: '_processWorkerError',
+      className: 'WorkerManager',
+      message: `worker ${index} errored out`,
+      error: JSON.stringify(error),
+    });
   }
 
   /**
